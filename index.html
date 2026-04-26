@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="AI for Real Life — A 5-week practical lab course for beginners at International College of the Cayman Islands. No coding required.">
+<title>AI for Real Life — ICCI 5-Week Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --bg-elevated: #FFFFFF;
+    --bg-soft: #F7F7F5;
+    --ink: #1A1A1F;
+    --ink-muted: #555560;
+    --ink-faint: #8A8A94;
+    --line: #E4E4E0;
+    --line-strong: #D0D0CC;
+    --icci-blue: #0E5C8C;
+    --icci-blue-soft: #E6EFF5;
+    --icci-orange: #E85D1F;
+    --icci-orange-soft: #FCE8DD;
+    --icci-yellow: #F4B41A;
+    --icci-yellow-soft: #FBF1D2;
+    --shadow-sm: 0 1px 2px rgba(26, 26, 31, 0.04), 0 1px 3px rgba(26, 26, 31, 0.06);
+    --shadow-md: 0 2px 8px rgba(26, 26, 31, 0.05), 0 4px 16px rgba(26, 26, 31, 0.04);
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+    --maxw: 1100px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ============ NAV ============ */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .nav-brand img {
+    height: 32px;
+    width: auto;
+    display: block;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  }
+  .nav-brand-text {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+  .nav-brand-text small {
+    display: block;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+  .nav-links {
+    display: flex;
+    gap: 4px;
+    list-style: none;
+  }
+  .nav-links a {
+    display: inline-block;
+    padding: 8px 14px;
+    text-decoration: none;
+    color: var(--ink-muted);
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: var(--radius-sm);
+    transition: color 0.15s, background 0.15s;
+  }
+  .nav-links a:hover { color: var(--icci-blue); background: var(--icci-blue-soft); }
+
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-sm);
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--ink);
+  }
+
+  @media (max-width: 820px) {
+    .nav-links { display: none; }
+    .nav-toggle { display: block; }
+    .nav-links.is-open {
+      display: flex;
+      position: absolute;
+      top: 100%;
+      left: 0; right: 0;
+      flex-direction: column;
+      background: var(--bg-elevated);
+      padding: 12px;
+      border-bottom: 1px solid var(--line);
+      box-shadow: var(--shadow-md);
+    }
+    .nav-links.is-open a { padding: 12px 14px; }
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 80px 24px 60px;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--icci-orange);
+    margin-bottom: 24px;
+  }
+  .hero-eyebrow::before {
+    content: "";
+    width: 24px;
+    height: 1px;
+    background: var(--icci-orange);
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(42px, 7vw, 76px);
+    font-weight: 500;
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    margin-bottom: 24px;
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--icci-blue);
+    font-weight: 400;
+  }
+  .hero-pitch {
+    font-size: clamp(18px, 2.4vw, 22px);
+    line-height: 1.5;
+    color: var(--ink-muted);
+    max-width: 700px;
+    margin-bottom: 40px;
+    font-weight: 400;
+  }
+  .hero-pitch strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 56px;
+  }
+  .hero-meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .hero-meta-item .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--icci-blue);
+  }
+  .hero-meta-item.is-orange .dot { background: var(--icci-orange); }
+  .hero-meta-item.is-yellow .dot { background: var(--icci-yellow); }
+
+  /* ============ WHAT YOU'LL BUILD ============ */
+  .build {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    box-shadow: var(--shadow-md);
+  }
+  .build-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--icci-blue);
+    margin-bottom: 20px;
+  }
+  .build h2 {
+    font-family: var(--font-display);
+    font-size: clamp(24px, 3.5vw, 32px);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    margin-bottom: 28px;
+    font-variation-settings: "opsz" 72;
+  }
+  .build-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    list-style: none;
+  }
+  .build-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    font-size: 15px;
+    line-height: 1.45;
+  }
+  .build-list .check {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--icci-blue);
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .build-list .week {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-top: 4px;
+  }
+
+  @media (max-width: 600px) {
+    .build { padding: 24px; }
+  }
+
+  /* ============ SECTION PRIMITIVES ============ */
+  .section {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 80px 24px;
+  }
+  .section-header {
+    margin-bottom: 48px;
+    max-width: 720px;
+  }
+  .section-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--icci-orange);
+    margin-bottom: 16px;
+  }
+  .section-eyebrow::before {
+    content: "";
+    width: 20px;
+    height: 1px;
+    background: var(--icci-orange);
+  }
+  .section h2 {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4.5vw, 48px);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    font-variation-settings: "opsz" 96;
+  }
+  .section-lede {
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--ink-muted);
+  }
+
+  /* ============ JOURNEY MAP ============ */
+  .journey-map {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    box-shadow: var(--shadow-sm);
+  }
+  .journey-track {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    position: relative;
+  }
+  .journey-track::before {
+    content: "";
+    position: absolute;
+    top: 22px;
+    left: 8%;
+    right: 8%;
+    height: 2px;
+    background: linear-gradient(to right, var(--icci-blue), var(--icci-orange));
+    z-index: 0;
+    opacity: 0.3;
+  }
+  .journey-step {
+    position: relative;
+    text-align: center;
+    z-index: 1;
+  }
+  .journey-step .num {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--bg-card);
+    border: 2px solid var(--icci-blue);
+    color: var(--icci-blue);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 14px;
+    transition: transform 0.2s;
+  }
+  .journey-step:nth-child(2) .num { border-color: var(--icci-blue); color: var(--icci-blue); }
+  .journey-step:nth-child(3) .num { border-color: var(--icci-yellow); color: #c08e10; }
+  .journey-step:nth-child(4) .num { border-color: var(--icci-orange); color: var(--icci-orange); }
+  .journey-step:nth-child(5) .num { border-color: var(--icci-orange); color: var(--icci-orange); }
+  .journey-step .label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 6px;
+  }
+  .journey-step .title {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .journey-step .desc {
+    font-size: 13px;
+    color: var(--ink-muted);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+  @media (max-width: 720px) {
+    .journey-track { grid-template-columns: 1fr; gap: 24px; }
+    .journey-track::before { display: none; }
+    .journey-step { display: flex; align-items: center; gap: 16px; text-align: left; }
+    .journey-step .num { margin: 0; flex-shrink: 0; }
+    .journey-step-text { flex: 1; }
+    .journey-map { padding: 28px 24px; }
+  }
+
+  /* ============ WEEKS ============ */
+  .weeks {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .week {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .week:hover { border-color: var(--line-strong); }
+  .week[open] { box-shadow: var(--shadow-md); border-color: var(--line-strong); }
+
+  .week-summary {
+    padding: 24px 28px;
+    cursor: pointer;
+    list-style: none;
+    display: grid;
+    grid-template-columns: 70px 1fr auto;
+    align-items: center;
+    gap: 24px;
+  }
+  .week-summary::-webkit-details-marker { display: none; }
+
+  .week-num {
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--icci-blue);
+    font-variation-settings: "opsz" 144;
+  }
+  .week:nth-of-type(2) .week-num { color: var(--icci-blue); }
+  .week:nth-of-type(3) .week-num { color: #c08e10; }
+  .week:nth-of-type(4) .week-num { color: var(--icci-orange); }
+  .week:nth-of-type(5) .week-num { color: var(--icci-orange); }
+
+  .week-title-block .week-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 4px;
+  }
+  .week-title-block h3 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+    margin-bottom: 4px;
+  }
+  .week-title-block .week-lab {
+    font-size: 14px;
+    color: var(--ink-muted);
+  }
+  .week-toggle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--bg-soft);
+    border: 1px solid var(--line-strong);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.25s, background 0.15s;
+    flex-shrink: 0;
+  }
+  .week-toggle::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+    transform: rotate(45deg);
+    margin-top: -3px;
+    transition: transform 0.25s;
+  }
+  .week[open] .week-toggle { background: var(--ink); border-color: var(--ink); }
+  .week[open] .week-toggle::before { border-color: white; transform: rotate(-135deg); margin-top: 3px; }
+
+  .week-body {
+    padding: 0 28px 32px;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 32px;
+    border-top: 1px dashed var(--line);
+    margin-top: -8px;
+    padding-top: 24px;
+  }
+
+  .week-body h4 {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 10px;
+  }
+  .week-body p { font-size: 15px; line-height: 1.6; color: var(--ink); }
+  .week-body p + h4 { margin-top: 24px; }
+  .week-body ul {
+    list-style: none;
+    margin-top: 4px;
+  }
+  .week-body ul li {
+    padding: 6px 0;
+    font-size: 14.5px;
+    color: var(--ink);
+    position: relative;
+    padding-left: 18px;
+    line-height: 1.5;
+  }
+  .week-body ul li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--icci-orange);
+    font-weight: 700;
+  }
+
+  .week-aside {
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    align-self: start;
+  }
+  .week-aside .tools-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .week-aside .tools-list a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 500;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .week-aside .tools-list a:hover {
+    border-color: var(--icci-blue);
+    background: var(--icci-blue-soft);
+  }
+  .week-aside .tools-list a .ext {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--ink-faint);
+  }
+  .week-aside .takehome {
+    margin-top: 16px;
+    padding: 14px;
+    background: var(--icci-yellow-soft);
+    border: 1px solid #ECD899;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .week-aside .takehome strong { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #8a6a10; margin-bottom: 6px; }
+
+  .week-fits {
+    margin-top: 20px;
+    padding: 16px 18px;
+    background: var(--icci-blue-soft);
+    border-left: 3px solid var(--icci-blue);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .week-fits strong {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--icci-blue);
+    margin-bottom: 6px;
+  }
+
+  /* Copy-paste prompt block (dark, mono) */
+  .week-prompts {
+    margin-top: 14px;
+    padding: 16px 18px;
+    background: #1A1A1F;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.75;
+    color: #F2EDE2;
+  }
+  .week-prompts strong {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--icci-yellow);
+    margin-bottom: 10px;
+  }
+  .week-prompts .pline {
+    padding: 3px 0;
+    position: relative;
+    padding-left: 18px;
+  }
+  .week-prompts .pline::before {
+    content: "›";
+    position: absolute;
+    left: 0;
+    color: var(--icci-orange);
+    font-weight: 700;
+    font-family: var(--font-body);
+  }
+
+  /* Reflection question block (warm orange) */
+  .week-ask {
+    margin-top: 16px;
+    padding: 18px 20px;
+    background: var(--icci-orange-soft);
+    border-left: 3px solid var(--icci-orange);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    line-height: 1.5;
+  }
+  .week-ask strong {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--icci-orange);
+    margin-bottom: 10px;
+  }
+  .week-ask p {
+    font-size: 14.5px !important;
+    line-height: 1.5 !important;
+    font-style: italic;
+    margin-bottom: 6px;
+    color: var(--ink) !important;
+    position: relative;
+    padding-left: 20px;
+  }
+  .week-ask p::before {
+    content: "?";
+    position: absolute;
+    left: 0;
+    font-style: normal;
+    font-weight: 700;
+    color: var(--icci-orange);
+  }
+  .week-ask p:last-child { margin-bottom: 0; }
+
+  @media (max-width: 760px) {
+    .week-summary { grid-template-columns: 50px 1fr auto; padding: 20px; gap: 16px; }
+    .week-num { font-size: 30px; }
+    .week-title-block h3 { font-size: 18px; }
+    .week-body { grid-template-columns: 1fr; padding: 0 20px 24px; padding-top: 20px; gap: 20px; }
+  }
+
+  /* ============ TOOLS GRID ============ */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+  }
+  .tool-card {
+    display: block;
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+  }
+  .tool-card:hover {
+    border-color: var(--icci-blue);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  .tool-card .tool-week {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--icci-orange);
+    background: var(--icci-orange-soft);
+    padding: 3px 8px;
+    border-radius: 100px;
+    margin-bottom: 12px;
+  }
+  .tool-card h4 {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+  }
+  .tool-card p {
+    font-size: 13.5px;
+    color: var(--ink-muted);
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+  .tool-card .tool-link {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--icci-blue);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .tool-card .tool-meta {
+    font-size: 11px;
+    color: var(--ink-faint);
+    margin-top: 8px;
+    font-family: var(--font-mono);
+  }
+
+  /* ============ RULES ============ */
+  .rules-wrap {
+    background: var(--ink);
+    color: #F2EDE2;
+    border-radius: var(--radius-lg);
+    padding: 56px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .rules-wrap::before {
+    content: "";
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(232, 93, 31, 0.15), transparent 70%);
+    pointer-events: none;
+  }
+  .rules-wrap .section-eyebrow { color: var(--icci-yellow); }
+  .rules-wrap .section-eyebrow::before { background: var(--icci-yellow); }
+  .rules-wrap h2 { color: #FFF8E6; }
+  .rules-wrap .section-lede { color: rgba(242, 237, 226, 0.7); }
+  .rules-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+    margin-top: 36px;
+    list-style: none;
+  }
+  .rules-list li {
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    position: relative;
+  }
+  .rules-list .rule-num {
+    font-family: var(--font-display);
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--icci-yellow);
+    line-height: 1;
+    margin-bottom: 12px;
+    display: block;
+    font-variation-settings: "opsz" 144;
+  }
+  .rules-list h4 {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .rules-list p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(242, 237, 226, 0.75);
+  }
+  @media (max-width: 600px) {
+    .rules-wrap { padding: 40px 28px; }
+  }
+
+  /* ============ BEFORE YOU START ============ */
+  .checklist {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+  }
+  .checklist-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .checklist-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .checklist-list .box {
+    flex-shrink: 0;
+    width: 10px;
+    height: 10px;
+    background: var(--icci-blue);
+    border-radius: 50%;
+    margin-top: 8px;
+  }
+  .checklist-list strong {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .checklist-list span {
+    font-size: 13.5px;
+    color: var(--ink-muted);
+    display: block;
+  }
+
+  @media (max-width: 600px) {
+    .checklist { padding: 24px; }
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    border-top: 1px solid var(--line);
+    margin-top: 80px;
+    padding: 48px 24px 32px;
+  }
+  .footer-inner {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .footer-brand img {
+    height: 36px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  }
+  .footer-brand-text {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .footer-brand-text small {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--ink-muted);
+    font-weight: 500;
+    margin-top: 2px;
+  }
+  .footer-meta {
+    font-size: 13px;
+    color: var(--ink-faint);
+    text-align: right;
+  }
+  .footer-meta p { margin-bottom: 4px; }
+
+  /* ============ DECORATIVE ============ */
+  .quote-mark {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--icci-orange);
+    font-weight: 400;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="nav-brand">
+      <img src="https://icci.edu.ky/wp-content/uploads/2016/02/logo.png"/>
+      <div class="nav-brand-text">
+        AI for Real Life
+        <small>ICCI &middot; 5-Week Lab</small>
+      </div>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#start">Before You Start</a></li>
+      <li><a href="#journey">Journey</a></li>
+      <li><a href="#weeks">Weekly Labs</a></li>
+      <li><a href="#tools">Tools</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header id="top" class="hero">
+  <div class="hero-eyebrow">A practical course at ICCI</div>
+  <h1>AI for <em>Real Life.</em><br/>No coding. Just practice.</h1>
+  <p class="hero-pitch">
+    <strong>Five weeks. Two hours a week. No prerequisites.</strong>
+    Train your own AI. Look inside how it works. Catch it lying. Audit its biases.
+    Walk out with practical skills, real artifacts, and a clear-eyed understanding
+    of where AI helps &mdash; and where it doesn&rsquo;t.
+  </p>
+  <div class="hero-meta">
+    <span class="hero-meta-item"><span class="dot"></span>5 weeks &middot; 10 hours total</span>
+    <span class="hero-meta-item is-orange"><span class="dot"></span>50% theory / 50% lab</span>
+    <span class="hero-meta-item is-yellow"><span class="dot"></span>Free tools only</span>
+  </div>
+
+  <!-- WHAT YOU&apos;LL BUILD -->
+  <div id="overview" class="build">
+    <div class="build-label">What you will leave with</div>
+    <h2>Six real artifacts. <span class="quote-mark">Yours to keep.</span></h2>
+    <ul class="build-list">
+      <li><span class="check">1</span><div>A custom AI model you trained yourself</div></li>
+      <li><span class="check">2</span><div>A visual map of how AI &ldquo;sees&rdquo; images, layer by layer</div></li>
+      <li><span class="check">3</span><div>Your own prompt library &mdash; 3 styles tested side-by-side</div></li>
+      <li><span class="check">4</span><div>Verified evidence of an AI hallucination you caught</div></li>
+      <li><span class="check">5</span><div>A bias audit comparing two of the world&rsquo;s most popular AI systems</div></li>
+      <li><span class="check">6</span><div>A personalized 6-month AI learning roadmap based on your career goals</div></li>
+    </ul>
+  </div>
+</header>
+
+<!-- ============ BEFORE YOU START ============ -->
+<section id="start" class="section">
+  <div class="section-header">
+    <div class="section-eyebrow">Before week 1</div>
+    <h2>Five-minute pre-flight.</h2>
+    <p class="section-lede">Do these before our first session so we don&rsquo;t lose 15 minutes to setup. All free. All quick.</p>
+  </div>
+
+  <div class="checklist">
+    <ul class="checklist-list">
+      <li>
+        <span class="box"></span>
+        <div>
+          <strong>Sign up for ChatGPT (free)</strong>
+          <span>Visit chat.openai.com. Use any email. Do this before Week 1 so you&rsquo;re ready.</span>
+        </div>
+      </li>
+      <li>
+        <span class="box"></span>
+        <div>
+          <strong>Sign up for Google Gemini (free)</strong>
+          <span>Visit gemini.google.com. Sign in with any Google account. Used in Week 5.</span>
+        </div>
+      </li>
+      <li>
+        <span class="box"></span>
+        <div>
+          <strong>Bring a laptop if you have one</strong>
+          <span>Phone works for most labs. Week 2 (Teachable Machine) is laptop-best &mdash; we&rsquo;ll pair you up if needed.</span>
+        </div>
+      </li>
+      <li>
+        <span class="box"></span>
+        <div>
+          <strong>Know how to take a screenshot on your device</strong>
+          <span>Most weekly take-home artifacts include a screenshot. Quick how-to: Cmd+Shift+4 on Mac, Win+Shift+S on Windows, side+volume on phones.</span>
+        </div>
+      </li>
+      <li>
+        <span class="box"></span>
+        <div>
+          <strong>Bring something to write in</strong>
+          <span>Notebook or document. The 3-sentence reflection at the end of every lab is non-negotiable. Your future self will thank you.</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ JOURNEY ============ -->
+<section id="journey" class="section">
+  <div class="section-header">
+    <div class="section-eyebrow">The journey</div>
+    <h2>One arc, five steps.</h2>
+    <p class="section-lede">
+      AI is built from <strong>data</strong>, which trains <strong>models</strong>, which produce
+      <strong>outputs</strong>, which we use <strong>responsibly</strong>, which shape <strong>careers</strong>.
+      Each week advances one stage. By the end, you will have done all six.
+    </p>
+  </div>
+
+  <div class="journey-map">
+    <div class="journey-track">
+      <div class="journey-step">
+        <div class="num">1</div>
+        <div class="journey-step-text">
+          <div class="label">Week 1</div>
+          <div class="title">What is AI?</div>
+          <div class="desc">The frame</div>
+        </div>
+      </div>
+      <div class="journey-step">
+        <div class="num">2</div>
+        <div class="journey-step-text">
+          <div class="label">Week 2</div>
+          <div class="title">Data trains models</div>
+          <div class="desc">The fuel &amp; engine</div>
+        </div>
+      </div>
+      <div class="journey-step">
+        <div class="num">3</div>
+        <div class="journey-step-text">
+          <div class="label">Week 3</div>
+          <div class="title">Models see patterns</div>
+          <div class="desc">The internals</div>
+        </div>
+      </div>
+      <div class="journey-step">
+        <div class="num">4</div>
+        <div class="journey-step-text">
+          <div class="label">Week 4</div>
+          <div class="title">Models generate</div>
+          <div class="desc">The output</div>
+        </div>
+      </div>
+      <div class="journey-step">
+        <div class="num">5</div>
+        <div class="journey-step-text">
+          <div class="label">Week 5</div>
+          <div class="title">Humans use it well</div>
+          <div class="desc">Ethics &amp; you</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WEEKS ============ -->
+<section id="weeks" class="section">
+  <div class="section-header">
+    <div class="section-eyebrow">Weekly labs</div>
+    <h2>Five labs. <em style="font-style:italic;">One steady rhythm.</em></h2>
+    <p class="section-lede">
+      Each lab follows the same four-phase practice: <strong>Watch &rarr; Try &rarr; Adjust &rarr; Reflect.</strong>
+      Same form every week. Different content. Click any week to see what you&rsquo;ll do.
+    </p>
+  </div>
+
+  <div class="weeks">
+
+    <!-- WEEK 1 -->
+    <details class="week" open>
+      <summary class="week-summary">
+        <div class="week-num">01</div>
+        <div class="week-title-block">
+          <div class="week-eyebrow">Chapters 1 &amp; 2 &middot; What is AI? + History</div>
+          <h3>Talk to AI old &amp; new</h3>
+          <div class="week-lab">Phone audit + ELIZA vs ChatGPT</div>
+        </div>
+        <div class="week-toggle" aria-hidden="true"></div>
+      </summary>
+      <div class="week-body">
+        <div>
+          <h4>Today you will</h4>
+          <p>Chat with an AI from 1966 and one from today. By the end, you&rsquo;ll be able to spot the difference between a rule-based system and a learning-based one without being told which is which.</p>
+
+          <h4>What you&rsquo;ll do</h4>
+          <ul>
+            <li>Audit your phone: list 5 apps you use that are AI-powered, even if you didn&rsquo;t know it</li>
+            <li>Open ELIZA in one tab and ChatGPT in another</li>
+            <li>Send each one the same three prompts (below)</li>
+            <li>Compare how each responds to identical input</li>
+            <li>Write your three reflection sentences</li>
+          </ul>
+
+          <div class="week-prompts">
+            <strong>Try these prompts in both</strong>
+            <div class="pline">I&rsquo;m worried about exams.</div>
+            <div class="pline">What should I do this weekend?</div>
+            <div class="pline">Tell me about yourself.</div>
+          </div>
+
+          <div class="week-ask">
+            <strong>Ask yourself</strong>
+            <p>Did either response feel like it understood you, or just pattern-matched?</p>
+            <p>Where did each one break down, repeat itself, or feel hollow?</p>
+            <p>If you didn&rsquo;t know which was from 1966, could you tell?</p>
+          </div>
+
+          <div class="week-fits">
+            <strong>Where this fits</strong>
+            ELIZA repeats your words back as questions &mdash; that&rsquo;s all it does. ChatGPT actually generates new sentences. Same conversation, two completely different machines underneath. The big difference: one was hand-coded with rules, the other learned from data. Next week you find out where that data comes from.
+          </div>
+        </div>
+        <aside class="week-aside">
+          <h4>Tools</h4>
+          <div class="tools-list">
+            <a href="https://anthay.github.io/eliza.html" target="_blank" rel="noopener">ELIZA (1966) <span class="ext">↗</span></a>
+            <a href="https://chat.openai.com" target="_blank" rel="noopener">ChatGPT (free) <span class="ext">↗</span></a>
+          </div>
+          <div class="takehome">
+            <strong>Take-home</strong>
+            ChatGPT account + ELIZA bookmark + your reflection notes
+          </div>
+        </aside>
+      </div>
+    </details>
+
+    <!-- WEEK 2 -->
+    <details class="week">
+      <summary class="week-summary">
+        <div class="week-num">02</div>
+        <div class="week-title-block">
+          <div class="week-eyebrow">Chapters 3 &amp; 4 &middot; Data + ML Fundamentals</div>
+          <h3>Train your own AI</h3>
+          <div class="week-lab">Build a classifier in 10 minutes &mdash; twice</div>
+        </div>
+        <div class="week-toggle" aria-hidden="true"></div>
+      </summary>
+      <div class="week-body">
+        <div>
+          <h4>Today you will</h4>
+          <p>Train your own image classifier from scratch using your laptop&rsquo;s webcam. By the end, you&rsquo;ll have a working AI you built yourself &mdash; and you&rsquo;ll have <em>felt</em> why bad data makes bad AI.</p>
+
+          <h4>What you&rsquo;ll do</h4>
+          <ul>
+            <li>Pick two simple things to tell apart (e.g., pen vs. phone, thumbs-up vs. peace sign, banana vs. apple)</li>
+            <li><strong>Round 1 &mdash; train it badly:</strong> capture only 10 photos of each, all from the same angle, same lighting</li>
+            <li>Test it. Watch it fail. Note where and why</li>
+            <li><strong>Round 2 &mdash; train it well:</strong> capture 30+ photos of each, vary the angle, distance, and lighting</li>
+            <li>Test again. Compare the confidence scores side by side</li>
+            <li><strong>Round 3 (optional):</strong> add a third category, or train on something of your choice</li>
+          </ul>
+
+          <div class="week-ask">
+            <strong>Ask yourself</strong>
+            <p>What kinds of photos did Round 1 fail on? What did it confidently get wrong?</p>
+            <p>What changed between Round 1 and Round 2 &mdash; was it the model, or the data?</p>
+            <p>Where in your real life have you seen AI fail in a similar way?</p>
+          </div>
+
+          <div class="week-fits">
+            <strong>Where this fits</strong>
+            You just lived through the supervised-learning loop: label data, train, test. You also lived through &ldquo;garbage in, garbage out.&rdquo; The model isn&rsquo;t broken &mdash; the data was. Most AI failures in the real world are exactly this. Next week you&rsquo;ll open a much more powerful model and see what&rsquo;s happening inside.
+          </div>
+        </div>
+        <aside class="week-aside">
+          <h4>Tools</h4>
+          <div class="tools-list">
+            <a href="https://teachablemachine.withgoogle.com" target="_blank" rel="noopener">Teachable Machine <span class="ext">↗</span></a>
+          </div>
+          <div class="takehome">
+            <strong>Take-home</strong>
+            Your trained model (sharable link or download) + 3-sentence reflection
+          </div>
+        </aside>
+      </div>
+    </details>
+
+    <!-- WEEK 3 -->
+    <details class="week">
+      <summary class="week-summary">
+        <div class="week-num">03</div>
+        <div class="week-title-block">
+          <div class="week-eyebrow">Chapters 5 &amp; 6 &middot; Deep Learning + NLP/CV</div>
+          <h3>Look inside the AI</h3>
+          <div class="week-lab">CNN Explainer + Tokenizer</div>
+        </div>
+        <div class="week-toggle" aria-hidden="true"></div>
+      </summary>
+      <div class="week-body">
+        <div>
+          <h4>Today you will</h4>
+          <p>Open up a real neural network and watch it process an image, layer by layer. Then see exactly how AI breaks language into numbers &mdash; including what it does to your own name.</p>
+
+          <h4>First &mdash; what is CNN Explainer actually showing you?</h4>
+          <p>A neural network is just lots of small &ldquo;pattern detectors&rdquo; stacked in layers. Each layer looks at a slightly bigger pattern than the one before it. CNN Explainer lets you see those layers light up while it tries to figure out what your image is.</p>
+          <p><strong>An analogy:</strong> imagine spotting a friend across a crowded room. Your eyes don&rsquo;t see &ldquo;Sarah&rdquo; instantly. First you notice a human shape. Then a hair color. Then familiar facial features. Then &mdash; <em>oh, that&rsquo;s Sarah.</em> A neural network does the same thing in stages: pixels &rarr; edges &rarr; shapes &rarr; objects. CNN Explainer just makes those stages visible.</p>
+
+          <h4>Part A &mdash; CNN Explainer (vision)</h4>
+          <ul>
+            <li>Open CNN Explainer. It loads with 10 sample images already at the top &mdash; click any one of them to use it</li>
+            <li>You&rsquo;ll see colorful blocks (the &ldquo;layers&rdquo;) running left to right. The image enters on the left; the network&rsquo;s guess comes out on the right</li>
+            <li>Click on any small colored square (a &ldquo;neuron&rdquo;) in the first layer. See what part of the image it&rsquo;s reacting to (usually edges or color blobs)</li>
+            <li>Now click a neuron in a deeper layer (further to the right). Notice how the patterns are bigger and more complex</li>
+            <li>Pick <em>one</em> hidden layer and stay there for 3 minutes. Look hard. What is it actually responding to?</li>
+            <li><strong>Want to upload your own image?</strong> CNN Explainer was trained on 10 specific things: pizza, espresso, sport car, school bus, red panda, koala, ladybug, lifeboat, bell pepper, and orange. Use a clear photo of one of those for best results. Need a sample? Try one from <a href="https://en.wikipedia.org/wiki/Pizza" target="_blank" rel="noopener" style="color: var(--icci-blue); font-weight: 600;">the Wikipedia Pizza article</a> &mdash; right-click and save any photo there.</li>
+          </ul>
+
+          <h4>Part B &mdash; Tokenizer (language)</h4>
+          <ul>
+            <li>Open Tiktokenizer. Try the prompts below in the input box</li>
+            <li>Watch how each piece of text breaks into tokens (the colored boxes)</li>
+            <li>Note the token count for each &mdash; this is what AI actually sees and what you&rsquo;d be charged for</li>
+          </ul>
+
+          <div class="week-prompts">
+            <strong>Try these in Tiktokenizer</strong>
+            <div class="pline">Your full name (first + last)</div>
+            <div class="pline">The weather in Cayman is beautiful today.</div>
+            <div class="pline">A sentence in your first language (if not English)</div>
+            <div class="pline">I love AI 🤖❤️</div>
+            <div class="pline">supercalifragilisticexpialidocious</div>
+          </div>
+
+          <div class="week-ask">
+            <strong>Ask yourself</strong>
+            <p>In CNN Explainer, what was the difference between an early layer and a deep layer?</p>
+            <p>Which of your tokenizer inputs had surprisingly many tokens? Why might that be?</p>
+            <p>If AI was trained mostly on English text, how might that affect users like you?</p>
+          </div>
+
+          <div class="week-fits">
+            <strong>Where this fits</strong>
+            You&rsquo;ve seen the abstraction ladder: pixels &rarr; edges &rarr; shapes &rarr; objects, and words &rarr; tokens &rarr; numbers. AI doesn&rsquo;t see images or read words the way you do &mdash; it processes patterns it learned from data. And the data wasn&rsquo;t neutral. Next week you&rsquo;ll see what happens when AI tries to <em>generate</em> something new.
+          </div>
+        </div>
+        <aside class="week-aside">
+          <h4>Tools</h4>
+          <div class="tools-list">
+            <a href="https://poloclub.github.io/cnn-explainer/" target="_blank" rel="noopener">CNN Explainer <span class="ext">↗</span></a>
+            <a href="https://tiktokenizer.vercel.app" target="_blank" rel="noopener">Tiktokenizer <span class="ext">↗</span></a>
+          </div>
+          <div class="takehome">
+            <strong>Take-home</strong>
+            CNN layer screenshot + tokenizer screenshot + 3-sentence reflection
+          </div>
+        </aside>
+      </div>
+    </details>
+
+    <!-- WEEK 4 -->
+    <details class="week">
+      <summary class="week-summary">
+        <div class="week-num">04</div>
+        <div class="week-title-block">
+          <div class="week-eyebrow">Chapters 7 &amp; 8 &middot; Generative AI + Applications</div>
+          <h3>Make AI lie. Catch it.</h3>
+          <div class="week-lab">Prompt lab + Hallucination hunt</div>
+        </div>
+        <div class="week-toggle" aria-hidden="true"></div>
+      </summary>
+      <div class="week-body">
+        <div>
+          <h4>Today you will</h4>
+          <p>Run the same task through three different prompt styles and see how the output changes. Then deliberately make the AI hallucinate a fact, and prove the lie. By the end, you&rsquo;ll know how to get more out of AI &mdash; and how to never trust it blindly.</p>
+
+          <h4>Part A &mdash; Three prompt styles, same task</h4>
+          <p>Pick a task. Send it to ChatGPT three different ways. Compare the outputs.</p>
+
+          <div class="week-prompts">
+            <strong>Same task, three ways</strong>
+            <div class="pline"><em>Vague:</em> Help me write an email to my landlord about the AC.</div>
+            <div class="pline"><em>Structured:</em> Write a polite, 4-sentence email to my landlord asking them to fix the AC unit, which has been broken for 3 days. Include a request for a timeline.</div>
+            <div class="pline"><em>Role-based:</em> Act as a tenant rights advisor. Write a polite but firm email to my landlord about a broken AC. Reference a 3-day delay. Keep it under 100 words.</div>
+          </div>
+
+          <h4>Part B &mdash; Hallucination hunt</h4>
+          <p>Pick one of these prompts. Send it to ChatGPT. The AI will likely invent something. Your job is to verify it with a real source (Google, Wikipedia, or a real database).</p>
+
+          <div class="week-prompts">
+            <strong>Hallucination-bait prompts</strong>
+            <div class="pline">Give me 5 academic citations about tourism in the Cayman Islands during the 1970s.</div>
+            <div class="pline">Summarize the plot of the 1992 film &ldquo;The Silent Harbor.&rdquo;</div>
+            <div class="pline">What did Mark Twain say about smartphones?</div>
+            <div class="pline">Tell me about the 1985 Cayman National Bank merger.</div>
+            <div class="pline">List 5 famous Caymanian novelists and their published works.</div>
+          </div>
+
+          <div class="week-ask">
+            <strong>Ask yourself</strong>
+            <p>Which of the three prompt styles gave you the best output? Why?</p>
+            <p>How confident did the AI sound when it was lying? Could you have caught it without checking?</p>
+            <p>Where in your life would an AI hallucination cause real problems?</p>
+          </div>
+
+          <div class="week-fits">
+            <strong>Where this fits</strong>
+            AI doesn&rsquo;t <em>know</em> things &mdash; it predicts the next likely word. That makes it powerful for some tasks and dangerous for others. Notice especially how often it hallucinates about local Cayman topics &mdash; the further from California the topic, the worse AI gets. Next week you&rsquo;ll audit those gaps systematically.
+          </div>
+        </div>
+        <aside class="week-aside">
+          <h4>Tools</h4>
+          <div class="tools-list">
+            <a href="https://chat.openai.com" target="_blank" rel="noopener">ChatGPT (free) <span class="ext">↗</span></a>
+            <a href="https://claude.ai" target="_blank" rel="noopener">Claude (free, backup) <span class="ext">↗</span></a>
+          </div>
+          <div class="takehome">
+            <strong>Take-home</strong>
+            Prompt comparison doc (3 styles) + one verified hallucination + reflection
+          </div>
+        </aside>
+      </div>
+    </details>
+
+    <!-- WEEK 5 -->
+    <details class="week">
+      <summary class="week-summary">
+        <div class="week-num">05</div>
+        <div class="week-title-block">
+          <div class="week-eyebrow">Chapters 9 &amp; 10 &middot; Ethics + Strategy/Careers</div>
+          <h3>Audit AI bias. Plan your path.</h3>
+          <div class="week-lab">Side-by-side bias audit + personal AI roadmap</div>
+        </div>
+        <div class="week-toggle" aria-hidden="true"></div>
+      </summary>
+      <div class="week-body">
+        <div>
+          <h4>Today you will</h4>
+          <p>Run identical prompts through two of the world&rsquo;s most popular AI systems and document what you find. Then build a personalized 6-month AI learning roadmap based on <em>your</em> career goals.</p>
+
+          <h4>Part A &mdash; Bias audit (30 min)</h4>
+          <p>Open ChatGPT in one tab and Gemini in another. Send each one the prompts below. Document the differences.</p>
+
+          <div class="week-prompts">
+            <strong>Run these in BOTH ChatGPT and Gemini</strong>
+            <div class="pline">Describe a successful CEO in 3 sentences.</div>
+            <div class="pline">Describe a nurse in 3 sentences.</div>
+            <div class="pline">Describe a person from a small island nation.</div>
+            <div class="pline">Write a 4-sentence story about a child growing up in the Caribbean.</div>
+            <div class="pline">List 5 traits of a great leader.</div>
+          </div>
+
+          <h4>Part B &mdash; Your AI roadmap (30 min)</h4>
+          <p>Use the prompt below in either ChatGPT or Gemini. Customize it with your real major, year, and goals. Save the response.</p>
+
+          <div class="week-prompts">
+            <strong>Roadmap prompt &mdash; customize and use</strong>
+            <div class="pline">I&rsquo;m a [your major] student at [year level] in the Cayman Islands. My career goal is [your goal]. Build me a realistic 6-month AI learning roadmap with monthly milestones. Focus on free resources and skills relevant to my field. Include both technical skills and AI literacy topics. Format as a month-by-month plan.</div>
+          </div>
+
+          <div class="week-ask">
+            <strong>Ask yourself</strong>
+            <p>For each bias prompt, did the two AIs give similar or different answers? What did they assume by default?</p>
+            <p>Were there any prompts where one AI was clearly more biased than the other?</p>
+            <p>Looking at your roadmap: which suggestions feel realistic for you, and which don&rsquo;t fit your reality? What does that gap tell you?</p>
+          </div>
+
+          <div class="week-fits">
+            <strong>Where this fits</strong>
+            Bias <em>comes from</em> the data (Week 2), <em>shows up in</em> generated outputs (Week 4), and <em>shapes</em> the careers AI thinks you should have (Week 5). The arc closes here. AI is a mirror &mdash; built mostly from the internet, mostly in English, mostly by people not from where you live. Now you know how to read it. The roadmap you walk out with is yours alone.
+          </div>
+        </div>
+        <aside class="week-aside">
+          <h4>Tools</h4>
+          <div class="tools-list">
+            <a href="https://chat.openai.com" target="_blank" rel="noopener">ChatGPT (free) <span class="ext">↗</span></a>
+            <a href="https://gemini.google.com" target="_blank" rel="noopener">Google Gemini <span class="ext">↗</span></a>
+          </div>
+          <div class="takehome">
+            <strong>Take-home</strong>
+            Bias audit notes + your personal AI learning roadmap (yours to keep)
+          </div>
+        </aside>
+      </div>
+    </details>
+
+  </div>
+</section>
+
+<!-- ============ TOOLS ============ -->
+<section id="tools" class="section">
+  <div class="section-header">
+    <div class="section-eyebrow">Toolkit</div>
+    <h2>The seven tools we use.</h2>
+    <p class="section-lede">All free. All work in your browser. Bookmark these &mdash; you&rsquo;ll come back to them after the course ends.</p>
+  </div>
+
+  <div class="tools-grid">
+    <a class="tool-card" href="https://anthay.github.io/eliza.html" target="_blank" rel="noopener">
+      <span class="tool-week">Week 1</span>
+      <h4>ELIZA</h4>
+      <p>The original 1966 chatbot &mdash; pure pattern-matching, no learning. Browser-only.</p>
+      <span class="tool-link">Open ELIZA &rarr;</span>
+      <div class="tool-meta">no account &middot; runs in browser</div>
+    </a>
+
+    <a class="tool-card" href="https://chat.openai.com" target="_blank" rel="noopener">
+      <span class="tool-week">Weeks 1, 4, 5</span>
+      <h4>ChatGPT (Free)</h4>
+      <p>Today&rsquo;s most-used LLM. Sign up before Week 1.</p>
+      <span class="tool-link">Open ChatGPT &rarr;</span>
+      <div class="tool-meta">free account required</div>
+    </a>
+
+    <a class="tool-card" href="https://teachablemachine.withgoogle.com" target="_blank" rel="noopener">
+      <span class="tool-week">Week 2</span>
+      <h4>Teachable Machine</h4>
+      <p>Google&rsquo;s no-code ML trainer. Train a classifier from your webcam in minutes.</p>
+      <span class="tool-link">Open Teachable Machine &rarr;</span>
+      <div class="tool-meta">no account &middot; runs in browser</div>
+    </a>
+
+    <a class="tool-card" href="https://poloclub.github.io/cnn-explainer/" target="_blank" rel="noopener">
+      <span class="tool-week">Week 3</span>
+      <h4>CNN Explainer</h4>
+      <p>Visualizes a real convolutional neural network layer-by-layer. Made by Georgia Tech.</p>
+      <span class="tool-link">Open CNN Explainer &rarr;</span>
+      <div class="tool-meta">no account &middot; runs in browser</div>
+    </a>
+
+    <a class="tool-card" href="https://tiktokenizer.vercel.app" target="_blank" rel="noopener">
+      <span class="tool-week">Week 3</span>
+      <h4>Tiktokenizer</h4>
+      <p>See how AI breaks any text into tokens &mdash; the units LLMs actually read.</p>
+      <span class="tool-link">Open Tiktokenizer &rarr;</span>
+      <div class="tool-meta">no account &middot; runs in browser</div>
+    </a>
+
+    <a class="tool-card" href="https://claude.ai" target="_blank" rel="noopener">
+      <span class="tool-week">Week 4 (backup)</span>
+      <h4>Claude (Free)</h4>
+      <p>Anthropic&rsquo;s assistant. Useful comparison or backup if ChatGPT is rate-limited.</p>
+      <span class="tool-link">Open Claude &rarr;</span>
+      <div class="tool-meta">free account required</div>
+    </a>
+
+    <a class="tool-card" href="https://gemini.google.com" target="_blank" rel="noopener">
+      <span class="tool-week">Week 5</span>
+      <h4>Google Gemini</h4>
+      <p>Google&rsquo;s LLM. Used in Week 5&rsquo;s side-by-side bias audit.</p>
+      <span class="tool-link">Open Gemini &rarr;</span>
+      <div class="tool-meta">free account required</div>
+    </a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="https://icci.edu.ky/wp-content/uploads/2016/02/logo.png"/>
+      <div class="footer-brand-text">
+        AI for Real Life
+        <small>International College of the Cayman Islands</small>
+      </div>
+    </div>
+    <div class="footer-meta">
+      <p>5 weeks &middot; 2 hours each &middot; In-person &middot; Free tools only</p>
+      <p>Tap any week above to expand. All resource links open in a new tab.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('is-open');
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => navLinks.classList.remove('is-open'));
+  });
+</script>
+
+</body>
+</html>
