@@ -743,6 +743,105 @@
     font-family: var(--font-mono);
   }
 
+  /* ============ FAQ ============ */
+  .faq-disclaimer {
+    margin-bottom: 24px;
+    padding: 14px 20px;
+    background: var(--icci-yellow-soft);
+    border: 1px solid #ECD899;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    line-height: 1.5;
+    color: #6b5310;
+  }
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .faq-item {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .faq-item:hover { border-color: var(--line-strong); }
+  .faq-item[open] { box-shadow: var(--shadow-md); border-color: var(--line-strong); }
+  .faq-summary {
+    padding: 22px 28px;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+    color: var(--ink);
+  }
+  .faq-summary::-webkit-details-marker { display: none; }
+  .faq-summary::after {
+    content: "";
+    flex-shrink: 0;
+    width: 12px;
+    height: 12px;
+    border-right: 2px solid var(--ink-muted);
+    border-bottom: 2px solid var(--ink-muted);
+    transform: rotate(45deg);
+    margin-top: -4px;
+    transition: transform 0.25s;
+  }
+  .faq-item[open] .faq-summary::after { transform: rotate(-135deg); margin-top: 4px; }
+  .faq-body {
+    padding: 0 28px 26px;
+    border-top: 1px dashed var(--line);
+    padding-top: 22px;
+    margin-top: -4px;
+  }
+  .faq-body p { font-size: 15.5px; line-height: 1.65; color: var(--ink); margin-bottom: 14px; }
+  .faq-body p:last-child { margin-bottom: 0; }
+  .faq-body ul {
+    list-style: none;
+    margin: 6px 0 18px;
+  }
+  .faq-body ul li {
+    padding: 8px 0;
+    padding-left: 20px;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink);
+    position: relative;
+  }
+  .faq-body ul li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--icci-orange);
+    font-weight: 700;
+  }
+  .faq-body strong { font-weight: 700; color: var(--ink); }
+  .faq-callout {
+    margin: 18px 0;
+    padding: 18px 22px;
+    background: var(--icci-blue-soft);
+    border-left: 3px solid var(--icci-blue);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.45;
+    color: var(--ink);
+    font-style: italic;
+  }
+  @media (max-width: 600px) {
+    .faq-summary { padding: 18px 20px; font-size: 17px; }
+    .faq-body { padding: 0 20px 22px; padding-top: 18px; }
+  }
+
   /* ============ RULES ============ */
   .rules-wrap {
     background: var(--ink);
@@ -924,6 +1023,7 @@
       <li><a href="#journey">Journey</a></li>
       <li><a href="#weeks">Weekly Labs</a></li>
       <li><a href="#tools">Tools</a></li>
+      <li><a href="#faq">FAQ</a></li>
       <li><a href="#feedback">Feedback</a></li>
     </ul>
   </div>
@@ -1316,6 +1416,7 @@
           <div class="tools-list">
             <a href="https://chat.openai.com" target="_blank" rel="noopener">ChatGPT (free) <span class="ext">↗</span></a>
             <a href="https://claude.ai" target="_blank" rel="noopener">Claude (free, backup) <span class="ext">↗</span></a>
+            <a href="https://www.promptingguide.ai/techniques" target="_blank" rel="noopener">Prompting Techniques Library <span class="ext">↗</span></a>
           </div>
           <div class="takehome">
             <strong>Take-home</strong>
@@ -1454,6 +1555,43 @@
       <span class="tool-link">Open Gemini &rarr;</span>
       <div class="tool-meta">free account required</div>
     </a>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq" class="section">
+  <div class="section-header">
+    <div class="section-eyebrow">FAQ</div>
+    <h2>Questions from class.</h2>
+    <p class="section-lede">Real questions students raised in our first session.</p>
+  </div>
+
+  <div class="faq-disclaimer">
+    <em>This section is a living document &mdash; new questions will be added here as they come up in class each week. Check back after every session.</em>
+  </div>
+
+  <div class="faq-list">
+    <details class="faq-item" open>
+      <summary class="faq-summary">Which AI model is best to use?</summary>
+      <div class="faq-body">
+        <p>There isn&rsquo;t a single &ldquo;best&rdquo; model &mdash; the right choice depends on what you&rsquo;re trying to do. Different models are trained and tuned to excel in different areas:</p>
+        <ul>
+          <li><strong>Claude (Anthropic)</strong> &mdash; strong at long-form reasoning, coding, and following nuanced instructions. Great for refactors, code reviews, and complex multi-step tasks.</li>
+          <li><strong>GPT (OpenAI)</strong> &mdash; broad general-purpose performance with a large ecosystem of plugins and tools. Good default for mixed workloads.</li>
+          <li><strong>Gemini (Google)</strong> &mdash; tightly integrated with Google services and strong at multimodal tasks (text + image + video).</li>
+          <li><strong>Llama / Mistral (open-source)</strong> &mdash; best when you need to self-host, fine-tune on private data, or run locally for privacy/cost reasons.</li>
+          <li><strong>Specialized models</strong> (e.g. Whisper for speech-to-text, Stable Diffusion for image generation) &mdash; outperform general models within their narrow domain.</li>
+        </ul>
+        <p>But picking the model is only one piece. The quality of the output depends just as much on <strong>how you prompt</strong> and <strong>what context you provide</strong>:</p>
+        <ul>
+          <li><strong>Prompt technique</strong> &mdash; being specific, breaking work into steps, giving examples, and telling the model what role to play (e.g. &ldquo;act as a senior security reviewer&rdquo;) all change the result dramatically.</li>
+          <li><strong>Context</strong> &mdash; what you feed in alongside the prompt: a clear description of the problem, your own background and goals, relevant code or documents, and pointers to the data sources that matter.</li>
+        </ul>
+        <p>A simple way to think about it:</p>
+        <div class="faq-callout">Great AI output = Right model for the job + Strong prompting technique + Rich, relevant context</div>
+        <p>Weakness in any one of those three will hold the other two back. A top-tier model with a vague prompt and no context will lose to a smaller model used skillfully.</p>
+      </div>
+    </details>
   </div>
 </section>
 
