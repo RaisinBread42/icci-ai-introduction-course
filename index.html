@@ -675,6 +675,103 @@
   }
   .week-ask p:last-child { margin-bottom: 0; }
 
+  /* Collapsible deep-dive inside "Ask yourself" */
+  .ask-deep {
+    margin-top: 16px;
+    border-top: 1px dashed rgba(0, 0, 0, 0.12);
+    padding-top: 12px;
+  }
+  .ask-deep > summary {
+    cursor: pointer;
+    list-style: none;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--icci-orange);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 0;
+    user-select: none;
+  }
+  .ask-deep > summary::-webkit-details-marker { display: none; }
+  .ask-deep > summary::before {
+    content: "+";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--icci-orange);
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .ask-deep[open] > summary::before { content: "\2212"; }
+  .ask-deep-body { padding-top: 12px; }
+  .ask-deep-list {
+    list-style: none;
+    counter-reset: askdeep;
+    padding: 0;
+    margin: 0;
+  }
+  .ask-deep-list > li {
+    counter-increment: askdeep;
+    position: relative;
+    padding-left: 36px;
+    margin-bottom: 18px;
+  }
+  .ask-deep-list > li:last-child { margin-bottom: 0; }
+  .ask-deep-list > li::before {
+    content: counter(askdeep);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1.5px solid var(--icci-orange);
+    color: var(--icci-orange);
+    font-weight: 700;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .ask-deep-list h5 {
+    margin: 2px 0 8px;
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--ink);
+    font-style: normal;
+  }
+  .ask-deep-list ul {
+    margin: 0 0 8px;
+    padding-left: 18px;
+  }
+  .ask-deep-list ul li {
+    font-size: 14px;
+    line-height: 1.5;
+    font-style: italic;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+  .ask-deep-insight {
+    font-size: 13.5px !important;
+    line-height: 1.5 !important;
+    font-style: normal !important;
+    padding: 8px 12px !important;
+    margin: 6px 0 0 !important;
+    background: rgba(255, 255, 255, 0.55);
+    border-left: 2px solid var(--icci-orange);
+    border-radius: 0 4px 4px 0;
+    color: var(--ink) !important;
+  }
+  .ask-deep-insight::before { content: none !important; }
+
   @media (max-width: 760px) {
     .week-summary { grid-template-columns: 50px 1fr auto; padding: 20px; gap: 16px; }
     .week-num { font-size: 30px; }
@@ -1269,6 +1366,62 @@
             <p>What kinds of photos did Round 1 fail on? What did it confidently get wrong?</p>
             <p>What changed between Round 1 and Round 2 &mdash; was it the model, or the data?</p>
             <p>Where in your real life have you seen AI fail in a similar way?</p>
+
+            <details class="ask-deep">
+              <summary>When you train an AI, who does it work for?</summary>
+              <div class="ask-deep-body">
+                <ol class="ask-deep-list">
+                  <li>
+                    <h5>Who&rsquo;s in your training data?</h5>
+                    <ul>
+                      <li>If you trained on only yourself, who is it accurate for?</li>
+                      <li>Would a friend with a different skin tone or hand size get the same result?</li>
+                    </ul>
+                    <p class="ask-deep-insight">A model only knows what it was shown. Limited data = limited audience.</p>
+                  </li>
+                  <li>
+                    <h5>What environment was the data collected in?</h5>
+                    <ul>
+                      <li>Will it work outside this exact room?</li>
+                      <li>What changes if the lighting, background, or distance shifts?</li>
+                    </ul>
+                    <p class="ask-deep-insight">Models silently fail when conditions don&rsquo;t match training.</p>
+                  </li>
+                  <li>
+                    <h5>What&rsquo;s missing from your training data?</h5>
+                    <ul>
+                      <li>What did you not show the model?</li>
+                      <li>What happens when the model sees something it&rsquo;s never seen before?</li>
+                    </ul>
+                    <p class="ask-deep-insight">AI can&rsquo;t say &ldquo;I don&rsquo;t know&rdquo; &mdash; it always picks something. That confident wrong answer is the dangerous one.</p>
+                  </li>
+                  <li>
+                    <h5>Whose voices, faces, or experiences are over-represented?</h5>
+                    <ul>
+                      <li>Who built the AI most people use today?</li>
+                      <li>If they share a similar background, what becomes &ldquo;normal&rdquo; &mdash; and what gets treated as the exception?</li>
+                    </ul>
+                    <p class="ask-deep-insight">Training data reflects who built it. That&rsquo;s why AI tends to work best for some groups and worst for others.</p>
+                  </li>
+                  <li>
+                    <h5>What&rsquo;s the cost of being wrong?</h5>
+                    <ul>
+                      <li>Is this AI used for fun, or for decisions that affect someone&rsquo;s life?</li>
+                      <li>A misclassified gesture in a game vs. a misclassified face in airport security &mdash; same error, different consequences. What&rsquo;s the difference?</li>
+                    </ul>
+                    <p class="ask-deep-insight">The bigger the decision, the more careful the data needs to be.</p>
+                  </li>
+                  <li>
+                    <h5>Did the people in your training data agree to be there?</h5>
+                    <ul>
+                      <li>Where did the data come from?</li>
+                      <li>Did the people in it know &mdash; and would they have said yes?</li>
+                    </ul>
+                    <p class="ask-deep-insight">Consent in AI training is rare. That&rsquo;s a fairness issue most people don&rsquo;t think about.</p>
+                  </li>
+                </ol>
+              </div>
+            </details>
           </div>
 
           <div class="week-fits">
