@@ -1314,6 +1314,7 @@
       <li><a href="#weeks">Weekly Labs</a></li>
       <li><a href="#tools">Tools</a></li>
       <li><a href="#faq">FAQ</a></li>
+      <li><a href="#advanced">Advanced</a></li>
       <li><a href="#feedback">Feedback</a></li>
     </ul>
   </div>
@@ -1471,7 +1472,7 @@
   <div class="weeks">
 
     <!-- WEEK 1 -->
-    <details class="week" open>
+    <details class="week">
       <summary class="week-summary">
         <div class="week-num">01</div>
         <div class="week-title-block">
@@ -2090,6 +2091,73 @@
         <p>A simple way to think about it:</p>
         <div class="faq-callout">Great AI output = Right model for the job + Strong prompting technique + Rich, relevant context</div>
         <p>Weakness in any one of those three will hold the other two back. A top-tier model with a vague prompt and no context will lose to a smaller model used skillfully.</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ ADVANCED TOPICS ============ -->
+<section id="advanced" class="section">
+  <div class="section-header">
+    <div class="section-eyebrow">Optional &middot; Advanced</div>
+    <h2>Going deeper: advanced topics.</h2>
+    <p class="section-lede">This section is for students who want to peek under the hood at how machine learning actually works. <strong>Totally optional</strong> &mdash; the core course doesn&rsquo;t depend on any of this. Expand a topic if you&rsquo;re curious; skip if you&rsquo;re not.</p>
+  </div>
+
+  <div class="faq-disclaimer">
+    <em>Heads up: the links below open external tutorial pages. Where a real Jupyter notebook is available, we&rsquo;ve called it out explicitly &mdash; look for the &ldquo;Open in Colab&rdquo; badge or the &ldquo;Download Jupyter notebook&rdquo; / &ldquo;Launch Binder&rdquo; buttons at the bottom of each scikit-learn example page.</em>
+  </div>
+
+  <div class="faq-list">
+    <details class="faq-item">
+      <summary class="faq-summary">Unsupervised learning &mdash; finding patterns without labels</summary>
+      <div class="faq-body">
+        <p><strong>What it is:</strong> the model is given data with <em>no answers attached</em> and has to discover structure on its own &mdash; usually by clustering similar items together or compressing the data to its essential dimensions.</p>
+        <p><strong>Input &rarr; process &rarr; output, simply:</strong></p>
+        <ul>
+          <li><strong>Input</strong> &mdash; a table of measurements (e.g. flower petal length/width for 150 flowers).</li>
+          <li><strong>Process</strong> &mdash; the algorithm groups rows that are &ldquo;close&rdquo; to each other in those measurements.</li>
+          <li><strong>Output</strong> &mdash; a cluster label (e.g. &ldquo;group 1, 2, or 3&rdquo;) for each row, even though nobody told it the species names.</li>
+        </ul>
+        <p><strong>Recommended notebooks &amp; reading:</strong></p>
+        <ul>
+          <li><a href="https://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_assumptions.html" target="_blank" rel="noopener">K-Means clustering example (scikit-learn)</a> &mdash; scroll to the bottom of the page for &ldquo;<strong>Download Jupyter notebook</strong>&rdquo; and &ldquo;<strong>Launch Binder</strong>&rdquo; buttons. Binder runs the notebook in your browser, no install.</li>
+          <li><a href="https://scikit-learn.org/stable/auto_examples/decomposition/plot_pca_vs_lda.html" target="_blank" rel="noopener">PCA vs LDA on Iris (scikit-learn)</a> &mdash; same deal: download the .ipynb or launch in Binder from the bottom of the page. Shows how a model squashes many dimensions down to 2 so you can plot them.</li>
+          <li><a href="https://scikit-learn.org/stable/modules/clustering.html" target="_blank" rel="noopener">scikit-learn clustering overview</a> &mdash; reading only (no notebook), but a great visual tour of every major clustering algorithm side-by-side.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-summary">Reinforcement learning &mdash; learning by trial and error</summary>
+      <div class="faq-body">
+        <p><strong>What it is:</strong> an &ldquo;agent&rdquo; takes actions in an environment, gets a reward (or penalty), and gradually learns which actions lead to the best long-term outcome. This is how AlphaGo learned Go and how robots learn to walk.</p>
+        <p><strong>Input &rarr; process &rarr; output, simply:</strong></p>
+        <ul>
+          <li><strong>Input</strong> &mdash; the current &ldquo;state&rdquo; of the world (e.g. which square the agent is standing on in a grid).</li>
+          <li><strong>Process</strong> &mdash; the agent tries an action, sees the reward, updates a table or network that maps state &rarr; best action.</li>
+          <li><strong>Output</strong> &mdash; the chosen action (e.g. &ldquo;move left&rdquo;). Over thousands of attempts, the policy gets better.</li>
+        </ul>
+        <p><strong>Recommended notebooks &amp; reading:</strong></p>
+        <ul>
+          <li><a href="https://colab.research.google.com/github/huggingface/deep-rl-class/blob/master/notebooks/unit2/unit2.ipynb" target="_blank" rel="noopener">Q-Learning on FrozenLake &mdash; Colab notebook (Hugging Face)</a> &mdash; <strong>direct Colab link</strong>. Click it, sign in to Google, and you&rsquo;re running the notebook. This is the actual hands-on from <a href="https://huggingface.co/learn/deep-rl-course/unit2/hands-on" target="_blank" rel="noopener">Unit 2 of the HF Deep RL Course</a>.</li>
+          <li><a href="https://huggingface.co/learn/deep-rl-course/unit2/introduction" target="_blank" rel="noopener">Unit 2 reading material</a> &mdash; the written explanation of Q-Learning that goes alongside the notebook above. Read this first if the code feels mysterious.</li>
+          <li><a href="https://gymnasium.farama.org/environments/toy_text/frozen_lake/" target="_blank" rel="noopener">Gymnasium FrozenLake reference</a> &mdash; API docs for the environment (not a notebook). Useful as a reference while you work through the Colab.</li>
+          <li><a href="https://github.com/ShangtongZhang/reinforcement-learning-an-introduction" target="_blank" rel="noopener">Sutton &amp; Barto companion code (GitHub)</a> &mdash; Python scripts (not notebooks) for every example in the standard RL textbook, including the simpler multi-armed bandit (chapter 2) if FrozenLake feels heavy.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-summary">How does this relate to the LLMs we&rsquo;ve been using?</summary>
+      <div class="faq-body">
+        <p>Modern chatbots like Claude, ChatGPT, and Gemini are built on a stack of <em>all three</em> learning styles:</p>
+        <ul>
+          <li><strong>Self-supervised pre-training</strong> (a cousin of unsupervised) &mdash; the base model reads a huge chunk of the internet and learns to predict the next word. No human labels needed.</li>
+          <li><strong>Supervised fine-tuning</strong> &mdash; humans write example conversations showing the model how to be helpful. The model learns from these labeled examples.</li>
+          <li><strong>Reinforcement learning from human feedback (RLHF)</strong> &mdash; humans rank model responses, and the model is rewarded for producing the kinds of answers humans preferred.</li>
+        </ul>
+        <p>So the small examples above (Iris clustering, FrozenLake) really are the same ideas that power the tools we use in class &mdash; just at a vastly smaller scale and easier to inspect.</p>
       </div>
     </details>
   </div>
