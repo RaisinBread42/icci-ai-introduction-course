@@ -1692,6 +1692,12 @@
           <div class="week-fits">
             <strong>Where this fits</strong>
             You&rsquo;ve seen the abstraction ladder: pixels &rarr; edges &rarr; shapes &rarr; objects, and words &rarr; tokens &rarr; numbers. AI doesn&rsquo;t see images or read words the way you do &mdash; it processes patterns it learned from data. And the data wasn&rsquo;t neutral. Next week you&rsquo;ll see what happens when AI tries to <em>generate</em> something new.
+
+            <figure style="margin: 18px 0 6px; text-align: center;">
+              <img src="images/cnn-decision-boundary.png" alt="A 2D plot showing CUP data points clustered together inside a curvy non-linear boundary, with OTHER OBJECT points outside it. The boundary is labeled F(x,y) = 0." style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--line);"/>
+              <figcaption style="font-size: 13px; color: var(--ink-muted); margin-top: 8px; font-style: italic;">A CNN&rsquo;s job, boiled down: draw a squiggly boundary in &ldquo;feature space&rdquo; that separates one thing (cups) from everything else. The layers you explored in CNN Explainer are what make that boundary possible.</figcaption>
+            </figure>
+            <p style="font-size: 14.5px; line-height: 1.55; color: var(--ink-muted); margin-top: 10px; font-style: italic;"><strong style="color: var(--ink);">If this picture clicks for you</strong> &mdash; the idea that the network is just learning <em>where to draw the line</em> between &ldquo;cup&rdquo; and &ldquo;not cup&rdquo; in a space of features &mdash; you&rsquo;ve got the core intuition behind every CNN (and most classifiers). The rest is just adding more dimensions and more layers.</p>
           </div>
           <details class="primer">
             <summary class="primer-summary">
